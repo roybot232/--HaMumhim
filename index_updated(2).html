@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="המומחים לפירוק, פינוי וניקיון – שירותים מקצועיים לפירוק רהיטים, פינוי דירות, ניקיון, פוליש וצבע. פעילים בכל הצפון.">
+<meta name="keywords" content="פירוק רהיטים, פינוי דירות, ניקיון, פוליש רצפה, צביעה, נצרת, חיפה, עפולה">
+<title>המומחים לפירוק, פינוי וניקיון</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #F97316;
+    --orange-dark: #EA6C0A;
+    --orange-light: #FED7AA;
+    --black: #111111;
+    --dark: #1A1A1A;
+    --gray: #6B7280;
+    --gray-light: #F3F4F6;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Heebo', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    overflow-x: hidden;
+    direction: rtl;
+  }
+  h1,h2,h3,h4 { font-weight: 800; line-height: 1.2; }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; right: 0; left: 0; z-index: 1000;
+    background: rgba(17,17,17,0.95);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: box-shadow 0.3s;
+  }
+  .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: var(--orange);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    font-weight: 900; color: white;
+  }
+  .logo-text { color: white; }
+  .logo-text strong { font-size: 17px; font-weight: 900; display: block; }
+  .logo-text span { font-size: 11px; color: var(--orange-light); font-weight: 400; }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: white;
+    padding: 10px 22px; border-radius: 10px;
+    font-weight: 700; font-size: 14px;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 8px; border: none; background: none;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: white; border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none; position: fixed;
+    top: 68px; right: 0; left: 0; bottom: 0;
+    background: var(--black);
+    padding: 40px 5%;
+    z-index: 999;
+    flex-direction: column; gap: 8px;
+    overflow-y: auto;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: rgba(255,255,255,0.8); font-size: 22px; font-weight: 600;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--orange); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 50%, #0d0d0d 100%);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(249,115,22,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(249,115,22,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-particles {
+    position: absolute; inset: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--orange);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up var(--dur, 8s) var(--delay, 0s) infinite ease-in-out;
+  }
+  @keyframes float-up {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3);
+    color: var(--orange); padding: 8px 18px; border-radius: 50px;
+    font-size: 13px; font-weight: 600; margin-bottom: 24px;
+    animation: fadeInDown 0.6s ease both;
+  }
+  .hero-badge::before { content: '⭐'; }
+  .hero h1 {
+    font-size: clamp(38px, 7vw, 72px);
+    color: white; margin-bottom: 20px;
+    animation: fadeInUp 0.7s 0.1s ease both;
+  }
+  .hero h1 .accent { color: var(--orange); }
+  .hero p {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: rgba(255,255,255,0.65);
+    max-width: 580px; margin: 0 auto 40px;
+    line-height: 1.7;
+    animation: fadeInUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeInUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--orange); color: white;
+    padding: 16px 36px; border-radius: 12px;
+    font-size: 17px; font-weight: 700; border: none; cursor: pointer;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 4px 20px rgba(249,115,22,0.4);
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(249,115,22,0.5); }
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 15px 32px; border-radius: 12px;
+    font-size: 17px; font-weight: 600; border: 2px solid rgba(255,255,255,0.25); cursor: pointer;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px;
+  }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 48px; justify-content: center; margin-top: 60px;
+    animation: fadeInUp 0.7s 0.4s ease both; flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; color: white; }
+  .hero-stat strong {
+    display: block; font-size: 36px; font-weight: 900;
+    color: var(--orange);
+  }
+  .hero-stat span { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; display: block; }
+  .scroll-indicator {
+    position: absolute; bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.3); font-size: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeIn 1s 1s ease both;
+  }
+  .scroll-arrow { animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* Section Commons */
+  section { padding: 100px 5%; }
+  .section-label {
+    display: inline-block; background: var(--orange-light);
+    color: var(--orange-dark); padding: 6px 16px;
+    border-radius: 50px; font-size: 12px; font-weight: 700;
+    margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .section-title { font-size: clamp(28px, 4vw, 44px); margin-bottom: 16px; }
+  .section-sub {
+    font-size: 17px; color: var(--gray); line-height: 1.7;
+    max-width: 560px;
+  }
+  .section-header { margin-bottom: 60px; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-sub { margin: 0 auto; }
+
+  /* Services */
+  .services { background: var(--gray-light); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .service-card {
+    background: white; border-radius: var(--radius);
+    padding: 32px 24px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute;
+    top: 0; right: 0; left: 0; height: 3px;
+    background: var(--orange);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 60px; height: 60px;
+    background: var(--orange-light);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; margin-bottom: 20px;
+    transition: background 0.3s;
+  }
+  .service-card:hover .service-icon { background: var(--orange); }
+  .service-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+  .service-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+  .service-tag {
+    display: inline-block; margin-top: 16px;
+    background: var(--gray-light); color: var(--orange-dark);
+    padding: 4px 12px; border-radius: 50px;
+    font-size: 12px; font-weight: 600;
+  }
+
+  /* About */
+  .about { background: white; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-box-main {
+    background: var(--dark); color: white;
+    border-radius: 24px; padding: 40px;
+    position: relative; overflow: hidden;
+  }
+  .about-box-main::after {
+    content: ''; position: absolute;
+    top: -40px; left: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(249,115,22,0.2) 0%, transparent 70%);
+  }
+  .about-box-main h3 {
+    font-size: 28px; color: white; margin-bottom: 8px; position: relative; z-index: 1;
+  }
+  .about-box-main p { color: rgba(255,255,255,0.65); line-height: 1.7; position: relative; z-index: 1; }
+  .about-pills {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; position: relative; z-index: 1;
+  }
+  .pill {
+    background: rgba(249,115,22,0.2); color: var(--orange-light);
+    padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 600;
+  }
+  .about-stat-card {
+    background: var(--orange); color: white;
+    border-radius: 20px; padding: 24px;
+    position: absolute; bottom: -24px; left: -24px;
+    box-shadow: 0 8px 32px rgba(249,115,22,0.4);
+  }
+  .about-stat-card strong { display: block; font-size: 36px; font-weight: 900; }
+  .about-stat-card span { font-size: 13px; opacity: 0.85; }
+  .about-features { display: flex; flex-direction: column; gap: 24px; }
+  .feature-item { display: flex; gap: 20px; align-items: flex-start; }
+  .feature-icon {
+    width: 50px; height: 50px; min-width: 50px;
+    background: var(--orange-light); color: var(--orange-dark);
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .feature-item h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .feature-item p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  /* Process */
+  .process { background: var(--dark); }
+  .process .section-title { color: white; }
+  .process .section-label { background: rgba(249,115,22,0.2); color: var(--orange); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px; position: relative; margin-top: 60px;
+  }
+  .process-step {
+    text-align: center; padding: 32px 24px;
+    position: relative;
+  }
+  .step-num {
+    width: 64px; height: 64px;
+    background: rgba(249,115,22,0.15); border: 2px solid rgba(249,115,22,0.3);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 900; color: var(--orange);
+    margin: 0 auto 20px;
+    transition: all 0.3s;
+  }
+  .process-step:hover .step-num {
+    background: var(--orange); border-color: var(--orange); color: white;
+    transform: scale(1.1);
+  }
+  .process-step h3 { font-size: 18px; color: white; margin-bottom: 10px; }
+  .process-step p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* Reviews */
+  .reviews { background: var(--gray-light); }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .review-card {
+    background: white; border-radius: var(--radius);
+    padding: 28px; box-shadow: var(--shadow);
+    transition: all 0.3s; position: relative;
+  }
+  .review-card::before {
+    content: '"'; position: absolute; top: 16px; left: 20px;
+    font-size: 80px; color: var(--orange-light); font-family: Georgia, serif;
+    line-height: 1; pointer-events: none;
+  }
+  .review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .stars { color: #FBBF24; font-size: 18px; margin-bottom: 12px; letter-spacing: 2px; }
+  .review-text {
+    font-size: 15px; color: var(--dark); line-height: 1.7;
+    margin-bottom: 20px; position: relative; z-index: 1;
+  }
+  .reviewer {
+    display: flex; align-items: center; gap: 14px;
+    border-top: 1px solid var(--gray-light); padding-top: 16px;
+  }
+  .reviewer-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--orange); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px; flex-shrink: 0;
+  }
+  .reviewer-name { font-weight: 700; font-size: 15px; }
+  .reviewer-city { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+  /* Contact */
+  .contact { background: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-card {
+    display: flex; align-items: center; gap: 18px;
+    padding: 20px; border-radius: 16px;
+    background: var(--gray-light);
+    transition: all 0.25s; cursor: pointer;
+    text-decoration: none; color: inherit;
+  }
+  .contact-card:hover { background: var(--orange-light); transform: translateX(-4px); }
+  .contact-card-icon {
+    width: 52px; height: 52px; min-width: 52px;
+    border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .contact-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .contact-card p { font-size: 14px; color: var(--gray); }
+  .whatsapp-card .contact-card-icon { background: #dcfce7; }
+  .phone-card .contact-card-icon { background: #dbeafe; }
+  .email-card .contact-card-icon { background: var(--orange-light); }
+  .contact-form-wrap {
+    background: var(--gray-light); border-radius: 24px;
+    padding: 36px;
+  }
+  .contact-form-wrap h3 { font-size: 22px; margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--dark);
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 13px 16px;
+    background: white; border: 2px solid transparent;
+    border-radius: 10px; font-size: 15px;
+    font-family: 'Heebo', sans-serif;
+    direction: rtl; outline: none; color: var(--dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--orange); box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    width: 100%; background: var(--orange); color: white;
+    border: none; border-radius: 12px; padding: 15px;
+    font-size: 17px; font-weight: 700; cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    transition: all 0.25s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .form-submit:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(249,115,22,0.4); }
+  .success-msg {
+    display: none; background: #dcfce7; border: 1px solid #86efac;
+    color: #166534; border-radius: 10px; padding: 16px; text-align: center;
+    font-weight: 600; margin-top: 16px;
+  }
+
+  /* FAQ */
+  .faq { background: var(--gray-light); }
+  .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: white; border-radius: 16px; overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .faq-q {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px; background: none; border: none; cursor: pointer;
+    font-family: 'Heebo', sans-serif; font-size: 16px; font-weight: 700;
+    color: var(--dark); text-align: right;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--orange); }
+  .faq-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    background: var(--orange-light); color: var(--orange-dark);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; margin-right: 0; margin-left: 0;
+    transition: all 0.3s;
+  }
+  .faq-item.open .faq-icon { background: var(--orange); color: white; transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s;
+    padding: 0 24px; color: var(--gray); font-size: 15px; line-height: 1.7;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+
+  /* Footer */
+  footer {
+    background: var(--black); color: rgba(255,255,255,0.6);
+    padding: 60px 5% 30px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 48px; padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 32px;
+  }
+  .footer-brand p { font-size: 14px; line-height: 1.7; margin-top: 16px; }
+  .footer-col h4 { color: white; font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    font-size: 14px; color: rgba(255,255,255,0.5);
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--orange); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    font-size: 13px;
+  }
+  .footer-bottom a { color: var(--orange); }
+
+  /* Floating Buttons */
+  .floating-btns {
+    position: fixed; bottom: 28px; left: 28px;
+    display: flex; flex-direction: column; gap: 12px;
+    z-index: 9000;
+  }
+  .float-btn {
+    width: 56px; height: 56px;
+    border-radius: 50%; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    transition: all 0.25s; text-decoration: none;
+  }
+  .float-btn:hover { transform: scale(1.1) translateY(-2px); }
+  .float-wa { background: #25D366; }
+  .float-phone { background: var(--orange); }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* Counter */
+  .counter { font-variant-numeric: tabular-nums; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-stat-card { left: 0; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 70px 5%; }
+    .hero-stats { gap: 28px; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .footer-top { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .floating-btns { bottom: 20px; left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <div class="logo-icon">מ</div>
+    <div class="logo-text">
+      <strong>המומחים</strong>
+      <span>לפירוק, פינוי וניקיון</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">שירותים</a></li>
+    <li><a href="#about">אודות</a></li>
+    <li><a href="#reviews">ביקורות</a></li>
+    <li><a href="#faq">שאלות נפוצות</a></li>
+    <li><a href="#contact" class="nav-cta">📞 צור קשר</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="תפריט">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">שירותים</a>
+  <a href="#about" onclick="closeMobile()">אודות</a>
+  <a href="#reviews" onclick="closeMobile()">ביקורות</a>
+  <a href="#faq" onclick="closeMobile()">שאלות נפוצות</a>
+  <a href="#contact" onclick="closeMobile()">📞 צור קשר</a>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">בעלי מקצוע מוסמכים ומנוסים</div>
+    <h1>
+      <span class="accent">המומחים</span><br>
+      לפירוק, פינוי וניקיון
+    </h1>
+    <p>
+      שירות מקצועי, אמין ומהיר לכל בית ומשרד.
+      פירוק רהיטים, פינוי דירות, ניקיון מעמיק, פוליש וצבע – הכל תחת קורת גג אחת.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/972539229893?text=שלום, אני מעוניין/ת בהצעת מחיר" class="btn-primary" target="_blank">
+        💬 קבל הצעת מחיר חינם
+      </a>
+      <a href="tel:+972539229893" class="btn-outline">
+        📞 התקשר עכשיו
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong class="counter" data-target="200">0</strong>
+        <span>לקוחות מרוצים</span>
+      </div>
+      <div class="hero-stat">
+        <strong class="counter" data-target="4">0</strong>
+        <span>שנות ניסיון</span>
+      </div>
+      <div class="hero-stat">
+        <strong class="counter" data-target="98">0</strong>
+        <span>% המלצות</span>
+      </div>
+      <div class="hero-stat">
+        <strong class="counter" data-target="24">0</strong>
+        <span>שירות שעות ביממה</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>גלול לגלות עוד</span>
+    <div class="scroll-arrow">▼</div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="section-header center">
+    <div class="section-label reveal">השירותים שלנו</div>
+    <h2 class="section-title reveal">כל מה שהבית שלך צריך</h2>
+    <p class="section-sub reveal">צוות מקצועי ומנוסה עם ציוד חדיש – מגיעים אליך בכל מקום בצפון הארץ</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🔨</div>
+      <h3>פירוק רהיטים</h3>
+      <p>פירוק מקצועי ובטוח של כל סוגי הרהיטים – ארונות, מיטות, מטבחים, סלון ועוד. מהיר ונקי.</p>
+      <div class="service-tag">⚡ שירות מהיר</div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">🚛</div>
+      <h3>פינוי דירות ומשרדים</h3>
+      <p>פינוי מלא של דירות, בתים, חדרים ומשרדים. כולל רהיטים כבדים, מכשירי חשמל ופסולת.</p>
+      <div class="service-tag">🏠 כל סוגי הנכסים</div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">✨</div>
+      <h3>ניקיון מעמיק</h3>
+      <p>ניקיון מקצועי עם ציוד תעשייתי ותכשירים איכותיים. בתים, משרדים, חדרי מדרגות ועוד.</p>
+      <div class="service-tag">🌿 תכשירים איכותיים</div>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">💎</div>
+      <h3>פוליש וצחצוח רצפות</h3>
+      <p>שיקום ופוליש לכל סוגי הרצפות – שיש, אבן, פורצלן וטרצו. תוצאות כמו חדש.</p>
+      <div class="service-tag">✅ תוצאות מדהימות</div>
+    </div>
+    <div class="service-card reveal reveal-delay-4">
+      <div class="service-icon">🎨</div>
+      <h3>צביעת דירות ומשרדים</h3>
+      <p>צוות צבעים מקצועי עם ניסיון עשיר. צבע פנים וחוץ, סיוד, טיח ועיצוב קיר. תוצאה מושלמת.</p>
+      <div class="service-tag">🎨 כל הסגנונות</div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">🔧</div>
+      <h3>עבודות תחזוקה כלליות</h3>
+      <p>תיקונים קטנים, הרכבת רהיטים, החלפת מנורות, תיקוני גבס ועוד – הכל בשיחה אחת.</p>
+      <div class="service-tag">🛠️ הכל כלול</div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-box-main">
+        <h3>מי אנחנו?</h3>
+        <p>
+          אנחנו צוות מקצועי עם למעלה מ-4 שנות ניסיון בתחום הפירוק, הפינוי והניקיון.
+          פועלים ברחבי הצפון ומספקים שירות אמין, מהיר ומסור לכל לקוח.
+        </p>
+        <div class="about-pills">
+          <span class="pill">נצרת</span>
+          <span class="pill">נוף הגליל</span>
+          <span class="pill">חיפה</span>
+          <span class="pill">עפולה</span>
+          <span class="pill">טבריה</span>
+          <span class="pill">כרמיאל</span>
+          <span class="pill">עכו</span>
+          <span class="pill">וכל הצפון והמרכז</span>
+        </div>
+      </div>
+      <div class="about-stat-card">
+        <strong>+200</strong>
+        <span>לקוחות מרוצים</span>
+      </div>
+    </div>
+    <div class="about-features">
+      <div class="section-label reveal">למה לבחור בנו</div>
+      <h2 class="section-title reveal">מקצועיות שמדברת בעד עצמה</h2>
+      <div class="feature-item reveal">
+        <div class="feature-icon">⚡</div>
+        <div>
+          <h4>מהירות ויעילות</h4>
+          <p>מגיעים בזמן ומסיימים את העבודה ביעילות מרבית. אין עיכובים, אין הפתעות.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-delay-1">
+        <div class="feature-icon">🛡️</div>
+        <div>
+          <h4>ביטוח מלא</h4>
+          <p>כל העבודות מבוטחות. רכושך בטוח בידינו מהרגע הראשון ועד הסוף.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-delay-2">
+        <div class="feature-icon">💰</div>
+        <div>
+          <h4>מחירים הוגנים</h4>
+          <p>הצעת מחיר חינם ושקופה לפני כל עבודה. אין עמלות נסתרות. מחיר שסוכם – מחיר שמשלמים.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal reveal-delay-3">
+        <div class="feature-icon">⭐</div>
+        <div>
+          <h4>דירוג 5 כוכבים</h4>
+          <p>למעלה מ-98% מהלקוחות ממליצים עלינו. שביעות רצון הלקוח היא הערך הכי חשוב לנו.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process" id="process">
+  <div class="section-header center">
+    <div class="section-label reveal">איך זה עובד</div>
+    <h2 class="section-title reveal">4 צעדים פשוטים</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">1</div>
+      <h3>יצירת קשר</h3>
+      <p>שלח הודעה בוואטסאפ, התקשר, או מלא טופס. אנחנו זמינים 24/7 לכל שאלה.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num">2</div>
+      <h3>הצעת מחיר</h3>
+      <p>נגיע אליך לסקירה מהירה ונספק הצעת מחיר שקופה וללא התחייבות תוך שעות.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num">3</div>
+      <h3>קביעת תאריך</h3>
+      <p>נגיע בתאריך ובשעה שנוחים לך. גמישים ומתאימים את הלוח זמנים אליך.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-num">4</div>
+      <h3>עבודה מושלמת</h3>
+      <p>צוות מקצועי מבצע את העבודה ביעילות ובניקיון. נעזוב מקום מסודר ונקי.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section class="reviews" id="reviews">
+  <div class="section-header center">
+    <div class="section-label reveal">ביקורות</div>
+    <h2 class="section-title reveal">הלקוחות מספרים</h2>
+    <p class="section-sub reveal">מאות לקוחות מרוצים מרחבי הצפון</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        שירות יוצא מן הכלל! הגיעו בדיוק בזמן, פינו את הדירה כולה בפחות מ-4 שעות.
+        הכל היה נקי ומסודר. ממליץ בחום לכולם!
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">א</div>
+        <div>
+          <div class="reviewer-name">אחמד מוחמד</div>
+          <div class="reviewer-city">📍 נצרת</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        עשו לי פוליש לרצפת השיש ולא האמנתי לעיניים שלי. נראית כמו חדשה לגמרי!
+        מחיר הוגן, עבודה מדהימה. בהחלט אחזור שוב.
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#22C55E">מ</div>
+        <div>
+          <div class="reviewer-name">מרים חסן</div>
+          <div class="reviewer-city">📍 נוף הגליל</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        פירקו לי מטבח שלם ופינו הכל תוך שעתיים. מקצועיים, נחמדים ויעילים מאוד.
+        גם המחיר היה הרבה יותר זול ממה שציפיתי. תודה רבה!
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#8B5CF6">ר</div>
+        <div>
+          <div class="reviewer-name">רנא ג'בארין</div>
+          <div class="reviewer-city">📍 עפולה</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        צבעו לי את כל הדירה – 5 חדרים – בשניים וחצי ימים. נקי להפליא, איכות צבע מעולה.
+        הצוות מקסים ומסביר פנים. מומלץ ביותר!
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#0EA5E9">ס</div>
+        <div>
+          <div class="reviewer-name">סלמא עבאס</div>
+          <div class="reviewer-city">📍 כרמיאל</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        ניקיון של המשרד שלנו אחרי שיפוץ – עבודה קשה מאוד ועשו אותה מצוין.
+        הכל ברמה הגבוהה ביותר. בהחלט ממשיכים לעבוד איתם.
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#EC4899">ח</div>
+        <div>
+          <div class="reviewer-name">חנין יוסף</div>
+          <div class="reviewer-city">📍 חיפה</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-3">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">
+        הכי טוב שהיה לי. הגיעו לפינוי חצר מלאה בפסולת. בשעה הכל היה נקי.
+        נאמנות מלאה, תמיד יאמינו בהם ויקראו שוב!
+      </p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#14B8A6">י</div>
+        <div>
+          <div class="reviewer-name">יוסף כנאענה</div>
+          <div class="reviewer-city">📍 עכו</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-header center">
+    <div class="section-label reveal">שאלות נפוצות</div>
+    <h2 class="section-title reveal">יש לכם שאלות?</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>כמה עולה שירות הפינוי?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">המחיר משתנה לפי גודל הנכס, כמות החפצים ומיקום. מגיעים לסקירה חינם ומספקים הצעת מחיר שקופה ללא התחייבות. התקשרו אלינו וקבלו הצעה תוך שעות.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>כמה זמן לוקח פינוי דירה?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">דירה ממוצעת (3-4 חדרים) לוקחת בין 3 ל-6 שעות בהתאם לכמות הרהיטים והחפצים. דירה גדולה יותר או בנין עלולים לקחת יום עבודה שלם. נציין זאת מראש בהצעת המחיר.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>לאיזה אזורים אתם מגיעים?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">אנחנו פועלים בכל אזור הצפון: נצרת, נוף הגליל, חיפה, עפולה, טבריה, כרמיאל, עכו, מגדל העמק, ועוד. לערים מרוחקות יותר יתכן תוספת נסיעה קטנה.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>האם אתם מבצעים פינוי פסולת ורהיטים ישנים?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">כן! אנחנו מפנים כל סוג של פסולת: רהיטים ישנים, מכשירי חשמל, שאריות בנייה, אשפה כללית ועוד. הכל מועבר לאתרי הפסולת המורשים.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>מה ההבדל בין ניקיון רגיל לניקיון מעמיק?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">ניקיון מעמיק כולל פינוי מגירות, ניקוי מאחורי מכשירים, שטיפת קירות, ניקוי נגרות ומסגרות חלונות, חיטוי ועוד. מתאים בעיקר למעבר דירה, לאחר שיפוץ, או כניקוי עונתי שנתי.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span>האם אפשר לקבוע לאותו יום?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">בהתאם לזמינות, לעיתים ניתן לקבוע לאותו יום. מומלץ לתאם מראש לפחות יום-יומיים מראש להבטיח את הצוות הטוב ביותר. לחירום – התקשרו ישירות!</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="section-label reveal">צרו קשר</div>
+      <h2 class="section-title reveal">דברו איתנו עכשיו</h2>
+      <p class="section-sub reveal" style="margin-bottom:36px">
+        אנחנו זמינים 7 ימים בשבוע. שלחו הודעה, התקשרו, או מלאו את הטופס ונחזור אליכם תוך שעה.
+      </p>
+      <div class="contact-info">
+        <a href="https://wa.me/972539229893?text=שלום, אני מעוניין/ת בשירות" class="contact-card whatsapp-card reveal" target="_blank">
+          <div class="contact-card-icon">💬</div>
+          <div>
+            <h4>וואטסאפ</h4>
+            <p>שלח הודעה עכשיו – נגיב מיד</p>
+          </div>
+        </a>
+        <a href="tel:+972539229893" class="contact-card phone-card reveal reveal-delay-1">
+          <div class="contact-card-icon">📞</div>
+          <div>
+            <h4>טלפון: 053-9229893</h4>
+            <p>זמינים 24/7 לכל שאלה</p>
+          </div>
+        </a>
+        <div class="contact-card email-card reveal reveal-delay-2">
+          <div class="contact-card-icon">📍</div>
+          <div>
+            <h4>אזורי פעילות</h4>
+            <p>צפון ומרכז הארץ – נצרת, חיפה, תל אביב, פתח תקווה, ראשון לציון והסביבה</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <h3>שלח הודעה</h3>
+      <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label>שם מלא *</label>
+          <input type="text" placeholder="הכנס שם מלא" required />
+        </div>
+        <div class="form-group">
+          <label>מספר טלפון *</label>
+          <input type="tel" placeholder="050-0000000" required />
+        </div>
+        <div class="form-group">
+          <label>עיר</label>
+          <select>
+            <option value="">בחר עיר</option>
+            <option>נצרת</option>
+            <option>נוף הגליל</option>
+            <option>חיפה</option>
+            <option>עפולה</option>
+            <option>טבריה</option>
+            <option>כרמיאל</option>
+            <option>עכו</option>
+            <option>מגדל העמק</option>
+            <option>שפרעם</option>
+            <option>סח'נין</option>
+            <option>אחר</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>סוג שירות</label>
+          <select>
+            <option value="">בחר שירות</option>
+            <option>פירוק רהיטים</option>
+            <option>פינוי דירה / משרד</option>
+            <option>ניקיון מעמיק</option>
+            <option>פוליש רצפות</option>
+            <option>צביעה</option>
+            <option>מספר שירותים</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>הודעה</label>
+          <textarea placeholder="תאר את השירות שאתה צריך..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">
+          <span>📨</span> שלח הודעה
+        </button>
+        <div class="success-msg" id="successMsg">
+          ✅ ההודעה נשלחה בהצלחה! נחזור אליך בהקדם.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-icon">מ</div>
+        <div class="logo-text">
+          <strong>המומחים</strong>
+          <span>לפירוק, פינוי וניקיון</span>
+        </div>
+      </div>
+      <p style="margin-top:16px">שירות מקצועי ואמין לפירוק, פינוי, ניקיון, פוליש וצבע ברחבי הצפון. זמינים 24/7.</p>
+    </div>
+    <div class="footer-col">
+      <h4>השירותים שלנו</h4>
+      <ul>
+        <li><a href="#services">פירוק רהיטים</a></li>
+        <li><a href="#services">פינוי דירות</a></li>
+        <li><a href="#services">ניקיון מעמיק</a></li>
+        <li><a href="#services">פוליש רצפות</a></li>
+        <li><a href="#services">צביעה</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>אזורי שירות</h4>
+      <ul>
+        <li><a href="#contact">נצרת</a></li>
+        <li><a href="#contact">נוף הגליל</a></li>
+        <li><a href="#contact">חיפה</a></li>
+        <li><a href="#contact">עפולה</a></li>
+        <li><a href="#contact">טבריה וכרמיאל</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2024 המומחים לפירוק, פינוי וניקיון. כל הזכויות שמורות.</div>
+    <div>
+      <a href="tel:+972539229893">📞 053-9229893</a> |
+      <a href="https://wa.me/972539229893" target="_blank">💬 וואטסאפ</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating Buttons -->
+<div class="floating-btns">
+  <a href="https://wa.me/972539229893?text=שלום, אני מעוניין/ת בשירות" class="float-btn float-wa" target="_blank" title="וואטסאפ">💬</a>
+  <a href="tel:+972539229893" class="float-btn float-phone" title="התקשר">📞</a>
+</div>
+
+<script>
+// Particles
+(function(){
+  const c=document.getElementById('particles');
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;--dur:${7+Math.random()*8}s;--delay:${Math.random()*10}s;width:${2+Math.random()*4}px;height:${2+Math.random()*4}px;`;
+    c.appendChild(p);
+  }
+})();
+
+// Navbar scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+});
+
+// Hamburger
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile(){mobileMenu.classList.remove('open');}
+
+// Reveal on scroll
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+reveals.forEach(r=>obs.observe(r));
+
+// Counter animation
+const counters=document.querySelectorAll('.counter');
+const cObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const target=parseInt(el.dataset.target);
+      let current=0;
+      const step=Math.ceil(target/60);
+      const interval=setInterval(()=>{
+        current=Math.min(current+step,target);
+        el.textContent=current+(el.dataset.target==='98'?'%':el.dataset.target==='24'?'/7':'+');
+        if(current>=target)clearInterval(interval);
+      },25);
+      cObs.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+counters.forEach(c=>cObs.observe(c));
+
+// FAQ
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+// Contact Form
+function submitForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.form-submit');
+  btn.textContent='שולח...';
+  btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('successMsg').style.display='block';
+    btn.textContent='✅ נשלח!';
+    e.target.reset();
+    setTimeout(()=>{
+      document.getElementById('successMsg').style.display='none';
+      btn.textContent='📨 שלח הודעה';
+      btn.disabled=false;
+    },4000);
+  },1200);
+}
+</script>
+</body>
+</html>
